@@ -1,0 +1,23 @@
+{
+    "name": "michael/app-salon_php_mvc_js_sass",
+    "description": "Proyecto App Salon, PHP 8, GULP, SASS, SQL",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controller\\": "./controllers",
+            "Model\\" : "./models",
+            "Classes\\" : "./classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "MichaelAcostaFreelancer",
+            "email": "michaelacostafreelancer@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.10",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
