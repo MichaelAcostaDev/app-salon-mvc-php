@@ -41,7 +41,7 @@ class Email
         $contenido .= "<p><strong>Hola, " . $this->nombre . "</strong> Has creado tu cuenta en App Salon,
         solo debes confirmarla presionando el siguiente enlace</p>";
         $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/confirmar-cuenta?token="
-            . $this->token . "' >Confirmar Cuenta </a> </p>";
+            . rawurlencode($this->token) . "' >Confirmar Cuenta </a> </p>";
         $contenido .= "<p>Si tu no solicitaste esta cuenta, puedes ignorar este mensaje</p>";
         $contenido .= "</html>";
         $mail->Body = $contenido;
@@ -73,7 +73,7 @@ class Email
         $contenido .= "<p><strong>Hola, " . $this->nombre . "</strong> Has solicitado restablecer tú
         password, sigue el siguiente enlace para hacerlo.</p>";
         $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/recover?token="
-            . $this->token . "' >Restablecer password </a> </p>";
+            . rawurlencode($this->token) . "' >Restablecer password </a> </p>";
         $contenido .= "<p>Si tu no solicitaste esta cuenta, puedes ignorar este mensaje</p>";
         $contenido .= "</html>";
         $mail->Body = $contenido;

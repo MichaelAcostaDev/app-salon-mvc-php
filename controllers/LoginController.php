@@ -103,7 +103,8 @@ class LoginController
         $alertas = [];
         $error = false;
 
-        $token = s($_GET['token']);
+        $token = trim((string) ($_GET['token'] ?? ''));
+        $token = rawurldecode($token);
 
         //Buscar usuario por su token
         $usuario = Usuario::where('token', $token);
@@ -195,16 +196,19 @@ class LoginController
     {
         $alertas = [];
 
-        $token = s($_GET['token']);
+        $token = trim((string) ($_GET['token'] ?? ''));
+        $token = rawurldecode($token);
 
-        $usuario = Usuario::where('token', $token);
+        $usuario = $token ? Usuario::where('token', $token) : null;
 
-        if (empty($usuario)) {
-            //Mostrar mensaje de error
+        if (!$token) {
+            Usuario::setAlerta('error', 'Token no válido');
+        } elseif (empty($usuario)) {
             Usuario::setAlerta('error', 'Validación incorrecta');
+        } elseif ($usuario->confirmado === '1') {
+            Usuario::setAlerta('exito', 'Tu cuenta ya estaba confirmada');
         } else {
-            //Modificar a usuario confirmado
-            $usuario->confirmado = "1";
+            $usuario->confirmado = '1';
             $usuario->token = null;
             $usuario->guardar();
             Usuario::setAlerta('exito', 'Cuenta comprobada correctamente');
