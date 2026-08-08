@@ -4,7 +4,7 @@ namespace Controller;
 
 use Model\Cita;
 use Model\CitaServicio;
-use Model\servicio;
+use Model\Servicio;
 
 class APIController
 {
